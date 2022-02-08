@@ -1,0 +1,18 @@
+ul{
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    padding: 0;
+    align-content: center;
+    align-items: center;
+    margin-left: 500px;
+    direction: rtl;
+    
+}
+li{
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid orange;
+    border-radius: 5px;
+    direction: rtl;
+}
