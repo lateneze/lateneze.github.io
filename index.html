@@ -5,23 +5,294 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>lateneze | Home</title>
+    <title>Laten Ezekiel | Portfolio</title>
 </head>
 <body>
-    <header>Laten Ezekiel</header>
-        <nav>
-            <ul>
-            <ul>
-            <ul>
-            <ul>
-            <ul>
-                <li><a href="">Home</a></li>
-                <li><a href="">Projects</a></li>
-                <li><a href="">Blog</a></li>
-                <li><a href="">About</a></li>
-                <li><a href="">Contact</a></li>
-            </ul>
-        </nav>
-    
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#home">Laten Ezekiel</a>
+            </div>
+            <div class="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#blog" class="nav-link">Blog</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Hi, I'm <span class="highlight">Laten Ezekiel</span></h1>
+            <p class="hero-subtitle">Full Stack Developer & Creative Problem Solver</p>
+            <p class="hero-description">
+                I create digital experiences that combine beautiful design with powerful functionality. 
+                Passionate about turning ideas into reality through code.
+            </p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="hero-placeholder">
+                <span class="code-icon">⚡</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        I'm a passionate developer with a love for creating innovative solutions. 
+                        My journey in technology began with curiosity and has evolved into a 
+                        dedication to crafting exceptional digital experiences.
+                    </p>
+                    <p>
+                        With expertise in modern web technologies, I enjoy working on projects 
+                        that challenge me to learn and grow. I believe in writing clean, 
+                        maintainable code and creating user-friendly interfaces.
+                    </p>
+                    <div class="skills">
+                        <h3>Skills & Technologies</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">Node.js</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">HTML/CSS</span>
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">MongoDB</span>
+                            <span class="skill-tag">PostgreSQL</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-stats">
+                    <div class="stat">
+                        <h3>2+</h3>
+                        <p>Years Experience</p>
+                    </div>
+                    <div class="stat">
+                        <h3>10+</h3>
+                        <p>Projects Completed</p>
+                    </div>
+                    <div class="stat">
+                        <h3>100%</h3>
+                        <p>Client Satisfaction</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2>My Projects</h2>
+            <p class="section-subtitle">Here are some of the projects I've worked on</p>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <span class="project-icon">🌐</span>
+                    </div>
+                    <div class="project-content">
+                        <h3>Portfolio Website</h3>
+                        <p>A responsive portfolio website built with modern web technologies to showcase my work and skills.</p>
+                        <div class="project-tech">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                🔗 Live Demo
+                            </a>
+                            <a href="#" class="project-link">
+                                📂 GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <span class="project-icon">🛒</span>
+                    </div>
+                    <div class="project-content">
+                        <h3>E-Commerce Platform</h3>
+                        <p>A full-stack e-commerce solution with user authentication, payment processing, and admin dashboard.</p>
+                        <div class="project-tech">
+                            <span>React</span>
+                            <span>Node.js</span>
+                            <span>MongoDB</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                🔗 Live Demo
+                            </a>
+                            <a href="#" class="project-link">
+                                📂 GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <span class="project-icon">✅</span>
+                    </div>
+                    <div class="project-content">
+                        <h3>Task Management App</h3>
+                        <p>A collaborative task management application with real-time updates and team collaboration features.</p>
+                        <div class="project-tech">
+                            <span>Vue.js</span>
+                            <span>Express</span>
+                            <span>Socket.io</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                🔗 Live Demo
+                            </a>
+                            <a href="#" class="project-link">
+                                📂 GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="blog">
+        <div class="container">
+            <h2>Latest Blog Posts</h2>
+            <p class="section-subtitle">Thoughts, tutorials, and insights from my development journey</p>
+            <div class="blog-grid">
+                <article class="blog-post">
+                    <div class="blog-image">
+                        <span class="blog-icon">💻</span>
+                    </div>
+                    <div class="blog-content">
+                        <span class="blog-date">Coming Soon</span>
+                        <h3>Building Modern Web Applications</h3>
+                        <p>An in-depth look at modern web development practices and tools that help create scalable applications.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+
+                <article class="blog-post">
+                    <div class="blog-image">
+                        <span class="blog-icon">📱</span>
+                    </div>
+                    <div class="blog-content">
+                        <span class="blog-date">Coming Soon</span>
+                        <h3>Responsive Design Best Practices</h3>
+                        <p>Tips and techniques for creating beautiful, responsive designs that work across all devices.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+
+                <article class="blog-post">
+                    <div class="blog-image">
+                        <span class="blog-icon">🚀</span>
+                    </div>
+                    <div class="blog-content">
+                        <span class="blog-date">Coming Soon</span>
+                        <h3>Optimizing Web Performance</h3>
+                        <p>Strategies for improving website speed and user experience through performance optimization.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Get In Touch</h2>
+            <p class="section-subtitle">I'd love to hear from you. Let's build something amazing together!</p>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span class="contact-icon">📧</span>
+                        <div>
+                            <h3>Email</h3>
+                            <p>laten.ezekiel@example.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">📞</span>
+                        <div>
+                            <h3>Phone</h3>
+                            <p>+1 (555) 123-4567</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">📍</span>
+                        <div>
+                            <h3>Location</h3>
+                            <p>Available for Remote Work</p>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            📂
+                        </a>
+                        <a href="#" class="social-link">
+                            💼
+                        </a>
+                        <a href="#" class="social-link">
+                            🐦
+                        </a>
+                        <a href="#" class="social-link">
+                            📷
+                        </a>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="subject" placeholder="Subject" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024 Laten Ezekiel. All rights reserved.</p>
+                <p>Built with ❤️ and code</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
