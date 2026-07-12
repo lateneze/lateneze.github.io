@@ -1,3 +1,97 @@
+// Fetch and display People data from Supabase
+async function fetchPeopleData() {
+    const tableBody = document.getElementById('people-table-body');
+    const spinner = document.getElementById('loading-spinner');
+    const table = document.getElementById('people-table');
+    const errorDiv = document.getElementById('error-message');
+    
+    try {
+        // Supabase API endpoint and key
+        const supabaseUrl = 'https://mylpzcqmawbwbsoexgtf.supabase.co/rest/v1/People';
+        const apiKey = 'sb_publishable_vsq1c8bLkTyPCc-HF734mQ_2ykS3sIR';
+        
+        // Fetch data from Supabase
+        const response = await fetch(supabaseUrl, {
+            headers: {
+                'apikey': apiKey,
+                'Authorization': `Bearer ${apiKey}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        // Hide spinner, show table
+        spinner.style.display = 'none';
+        table.style.display = 'table';
+        
+        // Clear existing rows
+        tableBody.innerHTML = '';
+        
+        // Check if data exists
+        if (!data || data.length === 0) {
+            tableBody.innerHTML = `
+                <tr>
+                    <td colspan="3" style="text-align: center; padding: 30px; color: #64748b;">
+                        No people found in the database.
+                    </td>
+                </tr>
+            `;
+            return;
+        }
+        
+        // Populate table with data
+        data.forEach(person => {
+            const row = document.createElement('tr');
+            
+            // Format the created_at date if it exists
+            const createdAt = person.created_at 
+                ? new Date(person.created_at).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                  })
+                : 'N/A';
+            
+            row.innerHTML = `
+                <td>${person.id || 'N/A'}</td>
+                <td><strong>${person.name || 'Unknown'}</strong></td>
+                <td>${createdAt}</td>
+            `;
+            
+            tableBody.appendChild(row);
+        });
+        
+    } catch (error) {
+        console.error('Error fetching people data:', error);
+        
+        // Hide spinner and table, show error
+        spinner.style.display = 'none';
+        table.style.display = 'none';
+        errorDiv.style.display = 'block';
+        errorDiv.textContent = `Failed to load data: ${error.message}. Please try again later.`;
+    }
+}
+
+// Load people data when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+    // Only fetch if the people section exists
+    if (document.getElementById('people-table-body')) {
+        fetchPeopleData();
+    }
+});
+
+// Optional: Refresh data every 30 seconds (if you want live updates)
+// setInterval(fetchPeopleData, 30000);
+
+
+
 // Mobile Navigation Toggle
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
