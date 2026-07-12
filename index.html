@@ -176,6 +176,30 @@
         </div>
     </section>
 
+        <!-- People Table Section -->
+    <section id="people" class="people-section">
+        <div class="container">
+            <h2>People Database</h2>
+            <p class="section-subtitle">Here are the people from my Supabase database</p>
+            <div id="people-table-container">
+                <div id="loading-spinner" class="spinner">Loading people data...</div>
+                <table id="people-table" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Created At</th>
+                        </tr>
+                    </thead>
+                    <tbody id="people-table-body">
+                        <!-- Data will be inserted here by JavaScript -->
+                    </tbody>
+                </table>
+                <div id="error-message" style="display: none; color: red;"></div>
+            </div>
+        </div>
+    </section>
+
     <!-- Blog Section -->
     <section id="blog" class="blog">
         <div class="container">
