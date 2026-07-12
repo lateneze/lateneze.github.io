@@ -196,6 +196,36 @@
                     </tbody>
                 </table>
                 <div id="error-message" style="display: none; color: red;"></div>
+                
+                <!-- Insert Form -->
+                <div id="insert-form-container">
+                    <h3>Add New Person</h3>
+                    <form id="insert-person-form">
+                        <div class="form-group">
+                            <label for="person-name">Name</label>
+                            <input 
+                                type="text" 
+                                id="person-name" 
+                                name="name" 
+                                placeholder="Enter person's name" 
+                                required
+                                minlength="2"
+                                maxlength="100"
+                            >
+                        </div>
+                        <div class="form-group">
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary" id="submit-person-btn">
+                                    ➕ Add Person
+                                </button>
+                                <button type="reset" class="btn btn-secondary" id="reset-form-btn">
+                                    Clear
+                                </button>
+                            </div>
+                        </div>
+                        <div id="form-message" style="display: none;"></div>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
