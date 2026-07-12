@@ -1,4 +1,6 @@
-// Fetch and display People data from Supabase
+// ============================================
+// FETCH PEOPLE DATA (existing function - updated)
+// ============================================
 async function fetchPeopleData() {
     const tableBody = document.getElementById('people-table-body');
     const spinner = document.getElementById('loading-spinner');
@@ -6,11 +8,9 @@ async function fetchPeopleData() {
     const errorDiv = document.getElementById('error-message');
     
     try {
-        // Supabase API endpoint and key
         const supabaseUrl = 'https://mylpzcqmawbwbsoexgtf.supabase.co/rest/v1/People';
         const apiKey = 'sb_publishable_vsq1c8bLkTyPCc-HF734mQ_2ykS3sIR';
         
-        // Fetch data from Supabase
         const response = await fetch(supabaseUrl, {
             headers: {
                 'apikey': apiKey,
@@ -25,14 +25,10 @@ async function fetchPeopleData() {
         
         const data = await response.json();
         
-        // Hide spinner, show table
         spinner.style.display = 'none';
         table.style.display = 'table';
-        
-        // Clear existing rows
         tableBody.innerHTML = '';
         
-        // Check if data exists
         if (!data || data.length === 0) {
             tableBody.innerHTML = `
                 <tr>
@@ -44,11 +40,8 @@ async function fetchPeopleData() {
             return;
         }
         
-        // Populate table with data
         data.forEach(person => {
             const row = document.createElement('tr');
-            
-            // Format the created_at date if it exists
             const createdAt = person.created_at 
                 ? new Date(person.created_at).toLocaleDateString('en-US', {
                     year: 'numeric',
@@ -70,8 +63,6 @@ async function fetchPeopleData() {
         
     } catch (error) {
         console.error('Error fetching people data:', error);
-        
-        // Hide spinner and table, show error
         spinner.style.display = 'none';
         table.style.display = 'none';
         errorDiv.style.display = 'block';
@@ -79,17 +70,157 @@ async function fetchPeopleData() {
     }
 }
 
-// Load people data when the page loads
+// ============================================
+// INSERT PERSON FUNCTION (NEW)
+// ============================================
+async function insertPerson(name) {
+    const supabaseUrl = 'https://mylpzcqmawbwbsoexgtf.supabase.co/rest/v1/People';
+    const apiKey = 'sb_publishable_vsq1c8bLkTyPCc-HF734mQ_2ykS3sIR';
+    
+    const response = await fetch(supabaseUrl, {
+        method: 'POST',
+        headers: {
+            'apikey': apiKey,
+            'Authorization': `Bearer ${apiKey}`,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=representation'  // Returns the inserted row
+        },
+        body: JSON.stringify({ name: name.trim() })
+    });
+    
+    if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || `HTTP error! status: ${response.status}`);
+    }
+    
+    return await response.json();
+}
+
+// ============================================
+// FORM HANDLING (NEW)
+// ============================================
 document.addEventListener('DOMContentLoaded', () => {
-    // Only fetch if the people section exists
+    // Fetch people data if section exists
     if (document.getElementById('people-table-body')) {
         fetchPeopleData();
     }
+    
+    // Handle insert form submission
+    const form = document.getElementById('insert-person-form');
+    const nameInput = document.getElementById('person-name');
+    const submitBtn = document.getElementById('submit-person-btn');
+    const resetBtn = document.getElementById('reset-form-btn');
+    const formMessage = document.getElementById('form-message');
+    
+    if (form) {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Get the name value
+            const name = nameInput.value.trim();
+            
+            // Validate
+            if (!name) {
+                showFormMessage('Please enter a name.', 'error');
+                return;
+            }
+            
+            if (name.length < 2) {
+                showFormMessage('Name must be at least 2 characters long.', 'error');
+                return;
+            }
+            
+            // Disable form during submission
+            nameInput.disabled = true;
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Adding...';
+            
+            // Clear previous messages
+            formMessage.className = '';
+            formMessage.style.display = 'none';
+            
+            try {
+                // Insert the person
+                const result = await insertPerson(name);
+                
+                // Success message
+                showFormMessage(`✅ Successfully added "${name}" to the database!`, 'success');
+                
+                // Reset the form
+                form.reset();
+                
+                // Refresh the table to show the new data
+                setTimeout(() => {
+                    fetchPeopleData();
+                }, 500);
+                
+            } catch (error) {
+                console.error('Error inserting person:', error);
+                
+                // Handle specific errors
+                let errorMsg = error.message || 'Failed to add person. Please try again.';
+                
+                if (errorMsg.includes('duplicate key')) {
+                    errorMsg = 'A person with this name already exists. Please use a different name.';
+                } else if (errorMsg.includes('permission denied')) {
+                    errorMsg = 'You don\'t have permission to add people to the database.';
+                }
+                
+                showFormMessage(`❌ ${errorMsg}`, 'error');
+                
+            } finally {
+                // Re-enable form
+                nameInput.disabled = false;
+                submitBtn.disabled = false;
+                submitBtn.textContent = '➕ Add Person';
+            }
+        });
+        
+        // Reset form handler
+        if (resetBtn) {
+            resetBtn.addEventListener('click', () => {
+                form.reset();
+                formMessage.className = '';
+                formMessage.style.display = 'none';
+                nameInput.disabled = false;
+                submitBtn.disabled = false;
+                submitBtn.textContent = '➕ Add Person';
+            });
+        }
+        
+        // Real-time validation on input
+        nameInput.addEventListener('input', () => {
+            const value = nameInput.value.trim();
+            if (value.length > 0 && value.length < 2) {
+                nameInput.style.borderColor = '#dc2626';
+            } else if (value.length >= 2) {
+                nameInput.style.borderColor = '#2563eb';
+            } else {
+                nameInput.style.borderColor = '#e2e8f0';
+            }
+        });
+    }
 });
 
-// Optional: Refresh data every 30 seconds (if you want live updates)
-// setInterval(fetchPeopleData, 30000);
-
+// ============================================
+// HELPER FUNCTIONS
+// ============================================
+function showFormMessage(message, type) {
+    const formMessage = document.getElementById('form-message');
+    if (!formMessage) return;
+    
+    formMessage.textContent = message;
+    formMessage.className = type; // 'success', 'error', or 'loading'
+    formMessage.style.display = 'block';
+    
+    // Auto-hide success messages after 5 seconds
+    if (type === 'success') {
+        setTimeout(() => {
+            formMessage.style.display = 'none';
+            formMessage.className = '';
+        }, 5000);
+    }
+}
 
 
 // Mobile Navigation Toggle
