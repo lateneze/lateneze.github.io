@@ -1,9 +1,12 @@
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on:
-  issues:
-    types: 
-      - opened
+  workflow_dispatch: # Allows manual execution from the Actions tab
+#  issues:
+#    types: 
+#      - opened
+      
+    
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
